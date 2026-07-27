@@ -1,25 +1,26 @@
-version: "3.9"
 services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+      - "8080:80"
+    networks:
+      - cloud-network
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
-    environment:
-      - DB_HOST=db
-      - SA_PASSWORD=StrongPassword123!
-    depends_on:
-      - db
+      - "8081:80"
+    networks:
+      - cloud-network
   db:
-    image: mcr.microsoft.com/azure-sql-edge:latest
+    image: mcr.microsoft.com/azure-sql-edge
     container_name: cloud-db
     environment:
-      SA_PASSWORD: StrongPassword123!
+      SA_PASSWORD: "StrongPassword123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+    networks:
+      - cloud-network
+networks:
+  cloud-network:
+    driver: bridge
