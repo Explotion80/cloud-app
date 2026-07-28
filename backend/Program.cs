@@ -15,8 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // 3. Pobranie Connection String (zmiennej środowiskowej z Dockera)
-var connectionString =
-    builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 // 4. Rejestracja bazy danych MS SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -46,7 +45,7 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<AppDbContext>();
 
         // 1. Tworzy bazę i tabele, jeśli ich nie ma
-        context.Database.EnsureCreated();
+        // context.Database.EnsureCreated();
 
         // 2. Dodaje startowe dane, jeśli tabela jest pusta (opcjonalne, ale fajne)
         if (!context.Tasks.Any())

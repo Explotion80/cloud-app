@@ -13,3 +13,4 @@ Te projekt został zaplanowany z myślą o usługach PaaS (Platform as a Service
 * [x] **Artefakt 2:** Konfiguracja środowiska Docker (w trakcie...).
 * [x] **Artefakt 3:** Działająca warstwa prezentacji (React + Vite w Dockerze).
 * [x] **Artefakt 4:** Działająca warstwa logiki backendu (.NET 9 + SQL Connection)
+* [x] **Artefakt 5:** Trwałość danych i profesjonalny kontrakt API (EF Migrations + DTO + UI Form).
